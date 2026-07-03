@@ -37,7 +37,8 @@ OpenConnector 不只是保存 provider 凭据。它把 Gateway、provider catalo
 
 ## 连入 SaaS Logo 墙
 
-OpenConnector 支持大规模 provider catalog。下面是一部分常见 SaaS 连接预览。
+OpenConnector 当前支持 643 个 provider 和 6,680 个预置 Action。下面的 logo 墙只是 catalog
+的一部分展示，不代表全部能力；它用一组高识别度连接，让用户快速感受到 OpenConnector 覆盖的 SaaS、开发者工具、效率应用、数据分析产品和 AI 服务远不止这些。
 
 ![连入 SaaS Logo 墙](assets/saas-logo-wall.png)
 

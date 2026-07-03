@@ -42,7 +42,10 @@ from scratch.
 
 ## Connected SaaS Logo Wall
 
-OpenConnector supports a broad provider catalog. Here is a preview of common SaaS connections.
+OpenConnector supports 643 providers and 6,680 prebuilt Actions. The logo wall below is only a
+partial preview of the catalog, not the full list. It highlights recognizable connections so you can
+quickly see the range of SaaS, developer tools, productivity apps, analytics products, and AI
+services that agents can reach through OpenConnector.
 
 ![Connected SaaS logo wall](assets/saas-logo-wall.png)
 
