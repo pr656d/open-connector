@@ -11,9 +11,10 @@
 [![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fconnector.oomol.com%2Fv1%2Fcatalog&query=data.providerCount&label=Providers&color=%237d7fe9)](https://oomol.com/apps)
 [![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fconnector.oomol.com%2Fv1%2Fcatalog&query=data.actionCount&label=Actions&color=%237d7fe9)](https://oomol.com/apps)
 
-OpenConnector 是一层开源 connector，用于让 Agent 可靠访问用户在外部应用中的账号。它负责鉴权、工具执行和面向 Agent
-的集成。当前开源 catalog 已经覆盖 680+ 个 provider 和 7,000+ 个预置 Action，支持本地运行或部署到 Cloudflare
-兼容基础设施，并通过 [Connector SDK](https://github.com/oomol-lab/connector-sdk)、MCP、HTTP、OpenAPI 和本地 Web 控制台暴露同一组工具。
+OpenConnector 是 Composio 的开源替代方案，用于面向 Agent 的 SaaS 鉴权、工具和集成。它是一层开源
+connector，用于让 Agent 可靠访问用户在外部应用中的账号。它负责鉴权、工具执行和面向 Agent 的集成。当前开源
+catalog 已经覆盖 680+ 个 provider 和 7,000+ 个预置 Action，支持本地运行或部署到 Cloudflare 兼容基础设施，并通过
+[Connector SDK](https://github.com/oomol-lab/connector-sdk)、MCP、HTTP、OpenAPI 和本地 Web 控制台暴露同一组工具。
 
 OpenConnector 让 Agent 能以受控方式进入真实产品工作流，同时把 credential、scope、schema、policy 和运行日志留在可检查、可运维的运行时内。
 Gateway、provider catalog 和 Action executors 都在源码中，团队可以审查契约、扩展 provider，并掌控部署边界。

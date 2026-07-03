@@ -11,9 +11,10 @@
 [![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fconnector.oomol.com%2Fv1%2Fcatalog&query=data.providerCount&label=Providers&color=%237d7fe9)](https://oomol.com/apps)
 [![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fconnector.oomol.com%2Fv1%2Fcatalog&query=data.actionCount&label=Actions&color=%237d7fe9)](https://oomol.com/apps)
 
-OpenConnector is an open-source connector layer for agents that need reliable access to user
-accounts in external apps. It handles auth, tool execution, and agent-ready integrations. The
-open-source catalog currently includes 680+ providers and 7,000+ prebuilt Actions, runs locally or on
+OpenConnector is an open-source alternative to Composio for agent-ready SaaS auth, tools, and
+integrations. It is a connector layer for agents that need reliable access to user accounts in
+external apps. It handles auth, tool execution, and agent-ready integrations. The open-source catalog
+currently includes 680+ providers and 7,000+ prebuilt Actions, runs locally or on
 Cloudflare-compatible infrastructure, and exposes the same tools through the
 [Connector SDK](https://github.com/oomol-lab/connector-sdk), MCP, HTTP, OpenAPI, and a local Web
 Console.
