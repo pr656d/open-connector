@@ -1,5 +1,5 @@
 import type { CatalogStore } from "../../catalog-store.ts";
-import type { ConnectionService, ExecutionConnection } from "../../connection-service.ts";
+import type { ConnectionService, ConnectionSummary, ExecutionConnection } from "../../connection-service.ts";
 import type { ActionPolicyService } from "../../core/action-policy.ts";
 import type { ExecutionContext, ExecutionResult, TransitFileWriter } from "../../core/types.ts";
 import type { IProviderLoader } from "../../providers/provider-loader.ts";
@@ -31,6 +31,7 @@ export interface ActionRunResult {
   executionId: string;
   auditPersisted: boolean;
   result: ExecutionResult;
+  connection?: ConnectionSummary;
 }
 
 /**
@@ -138,7 +139,7 @@ export class ActionRunner {
       this.options.logger?.warn(completedLogContext, "action run failed");
     }
 
-    return { executionId, auditPersisted, result };
+    return { executionId, auditPersisted, result, connection: connection?.summary };
   }
 
   listRuns(input?: RunLogListInput): Promise<RunLogPage> {
