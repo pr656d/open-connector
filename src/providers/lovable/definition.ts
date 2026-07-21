@@ -20,6 +20,7 @@ export const provider: ProviderDefinition = {
         method: "S256",
       },
       redirectUri: "http://localhost:3118/callback",
+      defaultClientId: "https://claude.ai/oauth/claude-code-client-metadata",
     },
     {
       type: "api_key",

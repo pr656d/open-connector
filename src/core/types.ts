@@ -147,6 +147,8 @@ export type OAuth2AuthDefinition = {
   clientConfigFields?: OAuthClientConfigFieldDefinition[];
   /** Optional custom static redirect URI overriding the default callback URL. */
   redirectUri?: string;
+  /** Optional default Client ID to prefill/fallback if user has not configured their own. */
+  defaultClientId?: string;
 };
 
 /**

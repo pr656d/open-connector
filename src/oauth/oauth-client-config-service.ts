@@ -63,8 +63,21 @@ export class OAuthClientConfigService {
   }
 
   async getConfig(service: string): Promise<OAuthClientConfig | undefined> {
-    this.getOAuthDefinition(service);
-    return normalizeStoredOAuthClientConfig(await this.store.get(service));
+    const auth = this.getOAuthDefinition(service);
+    const config = await this.store.get(service);
+    if (config) {
+      return normalizeStoredOAuthClientConfig(config);
+    }
+    if (auth.defaultClientId) {
+      return {
+        service,
+        clientId: auth.defaultClientId,
+        clientSecret: "",
+        extra: {},
+        secretExtra: {},
+      };
+    }
+    return undefined;
   }
 
   async upsertConfig(input: {
@@ -160,8 +173,8 @@ export class OAuthClientConfigService {
   ): OAuthClientConfigSummary {
     return {
       service,
-      configured: config != null,
-      clientId: config?.clientId ?? null,
+      configured: config != null || auth.defaultClientId != null,
+      clientId: config?.clientId ?? auth.defaultClientId ?? null,
       expectedRedirectUri: this.expectedRedirectUri(service),
       auth,
     };
