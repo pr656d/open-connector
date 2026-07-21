@@ -84,13 +84,6 @@ const listRulesInput = s.object(
   { optional: ["zoneId", "accountId", "page", "perPage"] },
 );
 
-export type CloudflareEmailRoutingActionName =
-  | "list_routing_rules"
-  | "create_routing_rule"
-  | "update_routing_rule"
-  | "delete_routing_rule"
-  | "list_destination_addresses";
-
 export const cloudflareEmailRoutingActions: ActionDefinition[] = [
   defineProviderAction(service, {
     name: "list_routing_rules",

@@ -14,6 +14,7 @@ const service = "cloudflare_email_routing";
 export const executors: ProviderExecutors = defineProviderExecutors<CloudflareEmailRoutingContext>({
   service,
   handlers: cloudflareEmailRoutingActionHandlers,
+  skipDnsValidation: true,
   async createContext(context: ExecutionContext, fetcher: typeof fetch): Promise<CloudflareEmailRoutingContext> {
     const credential = await requireCustomCredential(context, service);
     return {
@@ -29,6 +30,10 @@ export const executors: ProviderExecutors = defineProviderExecutors<CloudflareEm
 
 export const credentialValidators: CredentialValidators = {
   customCredential(input, { fetcher, signal }): Promise<CredentialValidationResult> {
-    return validateCloudflareEmailRoutingCredential(input.values, createProviderFetch({ fetch: fetcher }), signal);
+    return validateCloudflareEmailRoutingCredential(
+      input.values,
+      createProviderFetch({ fetch: fetcher, skipDnsValidation: true }),
+      signal,
+    );
   },
 };
