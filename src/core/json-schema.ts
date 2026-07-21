@@ -163,8 +163,12 @@ export const jsonSchema = {
     return withOptions({ type: "string", pattern }, options);
   },
 
-  stringEnum(valuesOrDescription: string[] | string, optionsOrValues: JsonSchemaOptions | string[] = {}): JsonSchema {
-    const values = typeof valuesOrDescription === "string" ? (optionsOrValues as string[]) : valuesOrDescription;
+  stringEnum(
+    valuesOrDescription: readonly string[] | string,
+    optionsOrValues: JsonSchemaOptions | readonly string[] = {},
+  ): JsonSchema {
+    const values =
+      typeof valuesOrDescription === "string" ? (optionsOrValues as readonly string[]) : valuesOrDescription;
     const options =
       typeof valuesOrDescription === "string"
         ? { description: valuesOrDescription }

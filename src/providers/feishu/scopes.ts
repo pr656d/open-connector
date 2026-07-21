@@ -6,11 +6,17 @@
  * read-only document and Bitable scopes plus offline access for token refresh.
  * See https://open.feishu.cn/document/authentication-management/access-token/get-user-access-token
  */
-export const feishuProviderScopes = {
+interface FeishuProviderScopes {
+  offlineAccess: string;
+  docxReadonly: string;
+  bitableAppReadonly: string;
+}
+
+export const feishuProviderScopes: FeishuProviderScopes = {
   offlineAccess: "offline_access",
   docxReadonly: "docx:document:readonly",
   bitableAppReadonly: "bitable:app:readonly",
-} as const;
+};
 
 export const feishuOAuthScopes: string[] = [
   feishuProviderScopes.offlineAccess,
