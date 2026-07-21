@@ -115,8 +115,8 @@ export class OAuthClientConfigService {
   }
 
   expectedRedirectUri(service: string): string {
-    this.getOAuthDefinition(service);
-    return `${this.origin}${OAuthClientConfigService.callbackPath}`;
+    const auth = this.getOAuthDefinition(service);
+    return auth.redirectUri ?? `${this.origin}${OAuthClientConfigService.callbackPath}`;
   }
 
   resolveEndpointUrl(service: string, endpointUrl: string, config: OAuthClientConfig): string {

@@ -145,6 +145,8 @@ export type OAuth2AuthDefinition = {
   };
   /** Extra local OAuth app fields required before starting authorization. */
   clientConfigFields?: OAuthClientConfigFieldDefinition[];
+  /** Optional custom static redirect URI overriding the default callback URL. */
+  redirectUri?: string;
 };
 
 /**

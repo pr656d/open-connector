@@ -19,6 +19,7 @@ export const provider: ProviderDefinition = {
       pkce: {
         method: "S256",
       },
+      redirectUri: "http://localhost:3118/callback",
     },
     {
       type: "api_key",
