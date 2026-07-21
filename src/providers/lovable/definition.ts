@@ -14,7 +14,15 @@ export const provider: ProviderDefinition = {
       type: "oauth2",
       authorizationUrl: "https://lovable.dev/oauth/authorize",
       tokenUrl: "https://lovable.dev/oauth/token",
-      scopes: ["offline", "projects:read", "projects:write", "projects:create", "workspaces:read", "workspaces:write"],
+      scopes: [
+        "offline",
+        "connector:invoke",
+        "projects:read",
+        "projects:write",
+        "projects:create",
+        "workspaces:read",
+        "workspaces:write",
+      ],
       tokenEndpointAuthMethod: "none",
       pkce: {
         method: "S256",
