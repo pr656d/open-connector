@@ -195,4 +195,7 @@ export const credentialValidators: CredentialValidators = {
   async apiKey(input, { fetcher, signal }) {
     return validateLovableCredential({ apiKey: input.apiKey }, fetcher, signal);
   },
+  async oauth2(input, { fetcher, signal }) {
+    return validateLovableCredential({ accessToken: input.accessToken, tokenType: input.tokenType }, fetcher, signal);
+  },
 };

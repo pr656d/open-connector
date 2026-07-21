@@ -8,8 +8,18 @@ export const provider: ProviderDefinition = {
   service,
   displayName: "Lovable",
   categories: ["AI", "Developer Tools"],
-  authTypes: ["api_key"],
+  authTypes: ["oauth2", "api_key"],
   auth: [
+    {
+      type: "oauth2",
+      authorizationUrl: "https://lovable.dev/oauth/authorize",
+      tokenUrl: "https://lovable.dev/oauth/token",
+      scopes: ["offline", "projects:read", "projects:write", "projects:create", "workspaces:read", "workspaces:write"],
+      tokenEndpointAuthMethod: "none",
+      pkce: {
+        method: "S256",
+      },
+    },
     {
       type: "api_key",
       label: "API Key",
