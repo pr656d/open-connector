@@ -27,7 +27,7 @@ import {
 } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Link, useParams } from "react-router";
-import { apiDelete, apiPost, apiPut } from "./api";
+import { apiDelete, apiGet, apiPost, apiPut } from "./api";
 import {
   credentialFieldsFor,
   filterProviders,
@@ -1049,8 +1049,39 @@ function ConnectionForm(props: ConnectionFormProps): ReactNode {
   const t = useTranslate();
   const [values, setValues] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<string | null>(null);
+  const [manualCallbackUrl, setManualCallbackUrl] = useState("");
   const stopOAuthRefreshPolling = useRef<(() => void) | undefined>(undefined);
   const fields = credentialFieldsFor(props.auth);
+
+  async function submitManualCallback(): Promise<void> {
+    const urlStr = manualCallbackUrl.trim();
+    if (!urlStr) return;
+
+    setStatus("Completing connection...");
+    try {
+      let url: URL;
+      try {
+        url = new URL(urlStr);
+      } catch {
+        url = new URL(`http://localhost/callback?${urlStr.replace(/^\?/, "")}`);
+      }
+
+      const code = url.searchParams.get("code");
+      const state = url.searchParams.get("state");
+
+      if (!code || !state) {
+        throw new Error("Could not find OAuth code or state in the pasted URL.");
+      }
+
+      await apiGet(`/oauth/callback?code=${encodeURIComponent(code)}&state=${encodeURIComponent(state)}`);
+
+      setStatus("Connected successfully!");
+      setManualCallbackUrl("");
+      props.onRefresh();
+    } catch (error) {
+      setStatus(error instanceof Error ? error.message : "Failed to complete connection");
+    }
+  }
   const showActions = shouldShowConnectionActions(props.auth);
   const connected = props.connection != null;
   const needsOAuthClient = props.auth.type === "oauth2" && !props.oauthConfig;
@@ -1161,16 +1192,49 @@ function ConnectionForm(props: ConnectionFormProps): ReactNode {
         </Alert>
       ) : null}
       {props.auth.type === "oauth2" ? (
-        <Alert variant={needsOAuthClient ? "warning" : "default"}>
-          {needsOAuthClient ? <Settings size={16} /> : <ExternalLink size={16} />}
-          <AlertDescription>
-            {needsOAuthClient
-              ? t("providers.connectionMessages.needsOAuthClient", { name: props.provider.displayName })
-              : connected
-                ? t("providers.connectionMessages.connectedOAuth", { name: props.provider.displayName })
-                : t("providers.connectionMessages.connectOAuth", { name: props.provider.displayName })}
-          </AlertDescription>
-        </Alert>
+        <>
+          <Alert variant={needsOAuthClient ? "warning" : "default"}>
+            {needsOAuthClient ? <Settings size={16} /> : <ExternalLink size={16} />}
+            <AlertDescription>
+              {needsOAuthClient
+                ? t("providers.connectionMessages.needsOAuthClient", { name: props.provider.displayName })
+                : connected
+                  ? t("providers.connectionMessages.connectedOAuth", { name: props.provider.displayName })
+                  : t("providers.connectionMessages.connectOAuth", { name: props.provider.displayName })}
+            </AlertDescription>
+          </Alert>
+          {!needsOAuthClient ? (
+            <div
+              style={{
+                marginTop: "1rem",
+                marginBottom: "1rem",
+                display: "flex",
+                flexDirection: "column",
+                gap: "0.5rem",
+              }}
+            >
+              <Label htmlFor="manual-oauth-callback">
+                If the authorization tab shows an error page, copy the final URL from the address bar and paste it here:
+              </Label>
+              <div style={{ display: "flex", gap: "0.5rem" }}>
+                <Input
+                  id="manual-oauth-callback"
+                  placeholder="http://localhost:3118/callback?code=...&state=..."
+                  value={manualCallbackUrl}
+                  onChange={(e) => setManualCallbackUrl(e.target.value)}
+                />
+                <Button
+                  type="button"
+                  variant="secondary"
+                  disabled={!manualCallbackUrl}
+                  onClick={() => void submitManualCallback()}
+                >
+                  Complete
+                </Button>
+              </div>
+            </div>
+          ) : null}
+        </>
       ) : null}
       {fields.map((field) => (
         <CredentialInput
