@@ -16,7 +16,6 @@ export const provider: ProviderDefinition = {
       tokenUrl: "https://lovable.dev/oauth/token",
       scopes: [
         "offline",
-        "connector:invoke",
         "projects:read",
         "projects:write",
         "projects:create",
