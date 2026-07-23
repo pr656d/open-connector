@@ -1,3 +1,3 @@
 
-## 14:26 | crew/CAD-64-cad-64-providers-perf-20260723-131450
-Diagnosed slow /providers (22.9 MB fetched every action, CAD-64); split schemas from list, cache on client, lazy-load details; measured 5.1× reduction (4.45 MB), refetch halted, 517 tests pass.
+## 15:52 | crew/CAD-64-cad-64-providers-perf-20260723-131450
+CAD-64: added scoped gzip to `/api/*` in connect-server.ts (22.9 MB → 457 KB wire, ~50×); verified `/mcp` streaming untouched; filed issue #5 pr656d/open-connector.
