@@ -174,7 +174,7 @@ describe("ConnectServer", () => {
     expect(catalogResponse.headers.get("cloudflare-cdn-cache-control")).toBe(
       "public, max-age=31536000, stale-while-revalidate=86400",
     );
-    expect(catalogResponse.headers.get("vary")).toBe("Authorization, Cookie");
+    expect(catalogResponse.headers.get("vary")).toBe("Authorization, Cookie, Accept-Encoding");
     await expect(catalogResponse.json()).resolves.toMatchObject({
       service: "example",
       displayName: "Example",
