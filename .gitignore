@@ -14,3 +14,6 @@ src/providers/registry*.generated.ts
 *.log
 *.tsbuildinfo
 data/
+graphify-out/cost.json
+graphify-out/manifest.json
+graphify-out/cache/
